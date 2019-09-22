@@ -36,8 +36,9 @@ def main():
     parser.add_argument('--iterations', default=100, help='Number of optimization steps for each batch', type=int)
     parser.add_argument('--decay_steps', default=10, help='Decay steps for learning rate decay (as a percent of iterations)', type=float)
     #parser.add_argument('--load_effnet', default='data/finetuned_effnet.h5', help='Model to load for EfficientNet approximation of dlatents')
-    parser.add_argument('--load_effnet', default='https://drive.google.com/file/d/1LFTlv0RFo2zXz2GKVEYZDBRL7wFIj5Cc/view?usp=sharing', help='Load a Model for EfficientNet approximation of dlatents from this URL') # finetuned_effnet_pretrained.h5
-    parser.add_argument('--load_resnet', default='data/finetuned_resnet.h5', help='Model to load for ResNet approximation of dlatents')
+    #parser.add_argument('--load_resnet', default='data/finetuned_resnet.h5', help='Model to load for ResNet approximation of dlatents')
+    parser.add_argument('--load_effnet', default='https://drive.google.com/open?id=1LFTlv0RFo2zXz2GKVEYZDBRL7wFIj5Cc', help='Load a EfficientNet model for approximation of dlatents from this URL') #finetuned_effnet_pretrained.h5
+    parser.add_argument('--load_resnet', default='https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l', help='Load a ResNet model for approximation of dlatents from this URL') #finetuned_resnet_pretrained.h5
 
     # Loss function options
     parser.add_argument('--use_vgg_loss', default=0.4, help='Use VGG perceptual loss; 0 to disable, > 0 to scale.', type=float)
