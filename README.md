@@ -6,6 +6,7 @@ StyleGAN Encoder is from @pbaylies
 * Images aligment - crop and align images (just faces kept) with *images_align.py*
 ```
 mkdir images_aligned_test
+
 python ./src/images_align.py images_raw_test/ images_aligned_test/
 ```
 
