@@ -25,3 +25,5 @@ python ./src/train_effnet.py --test_size 256 --batch_size 1024 --loop 10 --max_p
 python ./src/images_encode.py --batch_size=2 --output_video=True --load_effnet=data/finetuned_effnet.h5 images_aligned_test/ images_reconstructed_test/ images_latent_test/
 ```
 
+To be continued
+
