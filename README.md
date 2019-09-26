@@ -40,8 +40,7 @@
 
 
 
-
-* Identify feature axes - train a logistic regression model to get feature directions in latent space ([download the dataset](****.npy) and put it as *~/data/finetuned_resnet.h5*), and further make these feature directions normalized and orthogonal with *???.py*
+* Identify feature axes - train a logistic regression model to get feature directions for all features simultatiously in latent space ([download the dataset](****.npy) and put it as *~/data/finetuned_resnet.h5*), and further make these feature directions normalized and orthogonal with *???.py*
     ```
     #output feature axes '.npy'
     python ./src/align_images.py images_raw_test/ images_aligned_test/
