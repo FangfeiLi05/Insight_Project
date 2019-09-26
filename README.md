@@ -4,22 +4,22 @@
 ### StyleGAN Encoder (from @pbaylies)
 
 * Training encoder - two types of encoder
-  * ResNet encoder - train with *train_resnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l) and put it as *~/data/finetuned_resnet.h5*
+    * Train a ResNet encoder with *train_resnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l) and put it as *~/data/finetuned_resnet.h5*
       ```
       python ./src/train_resnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
       ```
     
-  * EfficientNet encoder - train with *train_effnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1LFTlv0RFo2zXz2GKVEYZDBRL7wFIj5Cc) and put it as *~/data/finetuned_effnet.h5*
+    * Train a EfficientNet encoder with *train_effnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1LFTlv0RFo2zXz2GKVEYZDBRL7wFIj5Cc) and put it as *~/data/finetuned_effnet.h5*
       ```
       python ./src/train_effnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
       ```
 
-* Images processing - crop and align images (just faces kept) with *images_align.py*
-```
-mkdir images_aligned_test
+* Align image - center and crop image with *align_images.py*
+    ```
+    mkdir images_aligned_test  #store aligned images
 
-python ./src/images_align.py images_raw_test/ images_aligned_test/
-```
+    python ./src/align_images.py images_raw_test/ images_aligned_test/
+    ```
 
 
 
