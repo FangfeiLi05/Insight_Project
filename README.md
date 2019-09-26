@@ -1,7 +1,7 @@
 ## Deep Learning Portrait Editing using StyleGAN and Latent Space Manipulation
 
 
-### StyleGAN encoder (from @pbaylies)
+### StyleGAN encoder (from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
 
 * Train encoder - two types of encoder
     * Train a ResNet encoder with *train_resnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l) and put it as *~/data/finetuned_resnet.h5*
