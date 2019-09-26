@@ -37,15 +37,16 @@
 
 ### Latent space manipulation (from [@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan))
 * Prepare for dataset - [download the dataset](https://drive.google.com/open?id=161rQuFYWObxNrzcKoI1bDp9eRmBZFLlg) and put it as *~/data/latent_dataset.npy*. The dataset cotains the latent representation ((9261,1)) and corresponding feature vector ((23,1)) of 20,307 images. The 23 features are *Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair*. The dataset is obtained from [original dataset](https://drive.google.com/uc?id=1xMM3AFq0r014IIhBLiMCjKJJvbhLUQ9t) using *latent_dataset.py*.
-
-
-
-* Identify feature axes - train a logistic regression model to get feature directions for all features simultatiously in latent space ([download the dataset](****.npy) and put it as *~/data/finetuned_resnet.h5*), and further make these feature directions normalized and orthogonal with *???.py*
     ```
-    #output feature axes '.npy'
-    python ./src/align_images.py images_raw_test/ images_aligned_test/
+    #output 'latent_dataset.npy'
+    python ./src/latent_dataset.py
     ```
-* 
 
-To be continued
+* Identify feature axes - train a logistic regression model to get feature directions for all features simultatiously in latent space, and further make these feature directions normalized and orthogonal with *???.py*
+    ```
+    #output '???.npy'
+    python ./src/???.py
+    ```
+
+* To be continued
 
