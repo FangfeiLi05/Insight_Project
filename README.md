@@ -29,8 +29,7 @@
 
 * Encode images - encode images into latent representations (18*512 matrix), and reconstruct images using StyleGAN generator with *encode_images.py*
     ```
-    #lantent representations are stored in the folder 'images_latent_test'
-    #reconstructed images are stored in the folder 'images_reconstructed_test'
+    #lantent representations are stored in the folder 'images_latent_test', and reconstructed images are stored in the folder 'images_reconstructed_test'
     
     python ./src/encode_images.py --batch_size=2 --output_video=True --load_effnet=data/finetuned_effnet.h5 images_aligned_test/ images_reconstructed_test/ images_latent_test/
     ```
