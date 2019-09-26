@@ -4,20 +4,15 @@
 ### StyleGAN Encoder (from @pbaylies)
 
 * Training encoder - two types of encoder
-    * ResNet encoder - train with *train_resnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l) and put it in *~/data/finetuned_resnet.h5*
-    ```
-    python ./src/train_resnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
-
-    python ./src/train_effnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
-    ```
+    * ResNet encoder - train with *train_resnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l) and put it as *~/data/finetuned_resnet.h5*
+      ```
+      python ./src/train_resnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
+      ```
     
-    * EfficientNet encoder - train with *train_effnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1LFTlv0RFo2zXz2GKVEYZDBRL7wFIj5Cc) and put it in *~/data/finetuned_effnet.h5*
-    
-```
-python ./src/train_resnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
-
-python ./src/train_effnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
-```
+    * EfficientNet encoder - train with *train_effnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1LFTlv0RFo2zXz2GKVEYZDBRL7wFIj5Cc) and put it as *~/data/finetuned_effnet.h5*
+     ```
+      python ./src/train_effnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
+      ```
 
 * Images processing - crop and align images (just faces kept) with *images_align.py*
 ```
