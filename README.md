@@ -14,9 +14,9 @@
       python ./src/train_effnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
       ```
 
-* Align image - center and crop image with *align_images.py*
+* Align images - center and crop images with *align_images.py*
     ```
-    mkdir images_aligned_test  #store aligned images
+    mkdir images_aligned_test  #a folder needed to store aligned images
 
     python ./src/align_images.py images_raw_test/ images_aligned_test/
     ```
