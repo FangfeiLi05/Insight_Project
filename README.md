@@ -17,7 +17,7 @@
 
 * Align images - center and crop images with *align_images.py*
     ```
-    mkdir images_aligned_test  #a folder needed to store aligned images
+    mkdir images_aligned_test  # a folder needed to store aligned images
 
     python ./src/align_images.py images_raw_test/ images_aligned_test/
     ```
