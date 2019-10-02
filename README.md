@@ -21,17 +21,17 @@
 
 * Align images - center and crop images with *align_images.py*
     ```
-    mkdir images_aligned_test  #a folder is needed to store aligned images
+    mkdir images_aligned  #a folder is needed to store aligned images
 
-    python ./src/align_images.py images_raw_test/ images_aligned_test/
+    python ./src/align_images.py images_raw/ images_aligned/
     ```
 
 
 * Encode images - encode images into latent representations ((18,512)), and reconstruct images using StyleGAN generator with *encode_images.py*
     ```
-    #lantent representations are stored in the folder 'images_latent_test', and reconstructed images are stored in the folder 'images_reconstructed_test'
+    #lantent representations are stored in folder 'images_latent', and reconstructed images are stored in folder 'images_reconstructed'
     
-    python ./src/encode_images.py --batch_size=2 --output_video=True --load_effnet=data/finetuned_effnet.h5 images_aligned_test/ images_reconstructed_test/ images_latent_test/
+    python ./src/encode_images.py --batch_size=2 --output_video=True --load_effnet=data/finetuned_effnet.h5 images_aligned/ images_reconstructed/ images_latent/
     ```
 
 
