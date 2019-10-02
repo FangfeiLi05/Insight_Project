@@ -81,5 +81,6 @@ feature_array[:,22] = feature_otherhair
 
 feature_array_normalized = (feature_array - np.min(feature_array, axis=0))/(np.max(feature_array, axis=0) - np.min(feature_array, axis=0))
 
-latent_dataset = {'latent_representation': dlatent_array, 'feature_vector':feature_array_normalized}
-np.save('./data/latent_dataset.npy', latent_dataset)
+
+np.save('./data/latent_dataset.npy', dlatent_array)
+np.save('./data/feature_dataset.npy', feature_array_normalized)
