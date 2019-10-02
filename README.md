@@ -20,23 +20,30 @@
 
 
 * Align images - center and crop images with *align_images.py*
-    ```
-    mkdir images_aligned  #a folder is needed to store aligned images
+  ```
+  mkdir images_aligned  #a folder is needed to store aligned images
 
-    python ./src/align_images.py images_raw/ images_aligned/
-    ```
+  python ./src/align_images.py images_raw/ images_aligned/
+  ```
 
 
 * Encode images - encode images into latent representations ((18,512)), and reconstruct images using StyleGAN generator with *encode_images.py*
-    ```
-    #lantent representations are stored in folder 'images_latent', and reconstructed images are stored in folder 'images_reconstructed'
+  ```
+  #lantent representations are stored in folder 'images_latent', and reconstructed images are stored in folder 'images_reconstructed'
     
-    python ./src/encode_images.py --batch_size=2 --output_video=True --load_effnet=data/finetuned_effnet.h5 images_aligned/ images_reconstructed/ images_latent/
-    ```
+  python ./src/encode_images.py --batch_size=2 --output_video=True --load_effnet=data/finetuned_effnet.h5 images_aligned/ images_reconstructed/ images_latent/
+  ```
 
 
 ### Latent space manipulation (from [@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan))
-* Prepare for dataset - [download the dataset](https://drive.google.com/open?id=161rQuFYWObxNrzcKoI1bDp9eRmBZFLlg) and put it as *~/data/latent_dataset.npy*. The dataset cotains the latent representation ((9261,1)) and corresponding feature vector ((23,1)) of 20,307 images. The 23 features are *Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair*. The dataset is obtained from [original dataset](https://drive.google.com/uc?id=1xMM3AFq0r014IIhBLiMCjKJJvbhLUQ9t) using *latent_dataset.py*.
+* Generate dataset - generate dataset cotaining the latent representation ((9261,1)) and corresponding feature vector ((23,1)) of 20,307 images. The 23 features are *Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair*. 
+  ```
+  #output is '~/data/latent_feature_dataset.npy'
+    
+  python latent_feature_dataset.py
+  ```
+
+[download the dataset](https://drive.google.com/open?id=161rQuFYWObxNrzcKoI1bDp9eRmBZFLlg) and put it as *~/data/latent_feature_dataset.npy*. The dataset cotains the latent representation ((9261,1)) and corresponding feature vector ((23,1)) of 20,307 images. The 23 features are *Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair*. The dataset is obtained from [original dataset](https://drive.google.com/uc?id=1xMM3AFq0r014IIhBLiMCjKJJvbhLUQ9t) using *latent_dataset.py*.
     ```
     #output 'latent_dataset.npy'
     python ./src/latent_dataset.py
