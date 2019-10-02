@@ -36,18 +36,13 @@
 
 
 ### Latent space manipulation (from [@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan))
-* Generate dataset - generate dataset cotaining the latent representation ((9261,1)) and corresponding feature vector ((23,1)) of 20,307 images. The 23 features are *Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair*. 
+* Generate dataset - generate dataset cotaining the latent representation (20307, 18*512) and corresponding 23 features (20307, 23) of 20,307 images, using the original dataset from [original dataset](https://drive.google.com/uc?id=1xMM3AFq0r014IIhBLiMCjKJJvbhLUQ9t). Features are *Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair*. 
   ```
   #output is '~/data/latent_feature_dataset.npy'
     
   python latent_feature_dataset.py
   ```
 
-[download the dataset](https://drive.google.com/open?id=161rQuFYWObxNrzcKoI1bDp9eRmBZFLlg) and put it as *~/data/latent_feature_dataset.npy*. The dataset cotains the latent representation ((9261,1)) and corresponding feature vector ((23,1)) of 20,307 images. The 23 features are *Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair*. The dataset is obtained from [original dataset](https://drive.google.com/uc?id=1xMM3AFq0r014IIhBLiMCjKJJvbhLUQ9t) using *latent_dataset.py*.
-    ```
-    #output 'latent_dataset.npy'
-    python ./src/latent_dataset.py
-    ```
 
 * Identify feature axes - train a logistic regression model to get feature directions for all features simultatiously in latent space, and further make these feature directions normalized and orthogonal with *???.py*
     ```
