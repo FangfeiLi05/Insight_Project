@@ -98,4 +98,5 @@
 ### Results demonstration
 * To be continued
 * Requirements needed to install
+* GUI
 
