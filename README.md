@@ -43,7 +43,7 @@
 * Identify feature axes - train a logistic regression model (not sure what this model should be called) to get feature axes normalized and orthogonal with *feature_axes.py*
   ```
   #output '~/data/feature_axis.npy'
-    python feature_axes.py
+  python feature_axes.py
   ```
 
 * Tune features - functions used to tune features continousely and show image
