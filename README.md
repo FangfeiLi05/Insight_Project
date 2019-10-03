@@ -35,14 +35,14 @@
 ### Latent space manipulation (from [@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan))
 * Generate dataset - generate dataset cotaining the latent representation (20307, 18*512) and corresponding 23 features (20307, 23) of 20,307 images, with *latent_feature_dataset.py*. Features are *Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair*. Original dataset is from [original dataset](https://drive.google.com/uc?id=1xMM3AFq0r014IIhBLiMCjKJJvbhLUQ9t). 
   ```
-  #output is '~/data/latent_feature_dataset.npy'
+  #output '~/data/latent_feature_dataset.npy'
   python latent_feature_dataset.py
   ```
 
 
 * Identify feature axes - train a logistic regression model (not sure what this model should be called) to get feature axes normalized and orthogonal with *feature_axes.py*
     ```
-    #output is '~/data/feature_axis.npy'
+    #output '~/data/feature_axis.npy'
     python feature_axes.py
     ```
 
