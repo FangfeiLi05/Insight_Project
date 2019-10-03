@@ -7,6 +7,7 @@
     * Train a ResNet encoder with *train_resnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l) and put it as *~/data/finetuned_resnet.h5*
       ```
       #python ./src/train_resnet.py --help
+      #output '~/data/latent_feature_dataset.npy'
       
       python ./src/train_resnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
       ```
@@ -51,7 +52,7 @@
   ```
 
 
-* Identify feature axes - train a logistic regression model (not sure what this model should be called) to get feature axes normalized and orthogonal with *feature_axes.py*
+* Identify feature axes - train a logistic regression model (not sure what this model should be called) to get feature axes normalized and orthogonal with *feature_axes.py*, or [download a pre-trained model](https://drive.google.com/open?id=1G_a48GFl9SPgXKui5Z2aY-aH5gUi6sR2) and put it as *~/data/feature_axis.npy*
   ```
   #output '~/data/feature_axis.npy'
   
@@ -96,4 +97,5 @@
 
 ### Results demonstration
 * To be continued
+* Requirements needed to install
 
