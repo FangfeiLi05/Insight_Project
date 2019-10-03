@@ -89,7 +89,7 @@
   direction = feature_axis[:,i].reshape((18, 512))
   coeff = 5
   
-  image_latent_tuned = tune_latent(image_latent, direction, coeff)
+  image_latent_tuned = tune_latent(image_latent, direction, coeff, list(range(8))
   latent_to_image(image_latent_tuned)
   ```
 
