@@ -12,18 +12,18 @@ import traceback
 def load_images(images_list, image_size=256):
     loaded_images = list()
     for img_path in images_list:
-        img = PIL.Image.open(img_path).convert('RGB').resize((image_size,image_size),PIL.Image.LANCZOS)
-        img = np.array(img)
-        img = np.expand_dims(img, 0)
-        loaded_images.append(img)
+      img = PIL.Image.open(img_path).convert('RGB').resize((image_size,image_size),PIL.Image.LANCZOS)
+      img = np.array(img)
+      img = np.expand_dims(img, 0)
+      loaded_images.append(img)
     loaded_images = np.vstack(loaded_images)
     return loaded_images
 
 def tf_custom_l1_loss(img1,img2):
-    return tf.math.reduce_mean(tf.math.abs(img2-img1), axis=None)
+  return tf.math.reduce_mean(tf.math.abs(img2-img1), axis=None)
 
 def tf_custom_logcosh_loss(img1,img2):
-    return tf.math.reduce_mean(tf.keras.losses.logcosh(img1,img2))
+  return tf.math.reduce_mean(tf.keras.losses.logcosh(img1,img2))
 
 def unpack_bz2(src_path):
     data = bz2.BZ2File(src_path).read()
@@ -62,8 +62,7 @@ class PerceptualModel:
         if (self.l1_penalty <= self.epsilon):
             self.l1_penalty = None
         self.batch_size = batch_size
-        #if perc_model is not None and self.lpips_loss is not None:
-        if perc_model is not None:
+        if perc_model is not None and self.lpips_loss is not None:
             self.perc_model = perc_model
         else:
             self.perc_model = None
@@ -138,11 +137,8 @@ class PerceptualModel:
         if (self.mssim_loss is not None):
             self.loss += self.mssim_loss * tf.math.reduce_mean(1-tf.image.ssim_multiscale(self.ref_weight * self.ref_img, self.ref_weight * generated_image, 1))
         # + extra perceptual loss on image pixels
-        #if (self.lpips_loss is not None) and (self.perc_model is not None):
-        if (self.lpips_loss is not None):
-            #self.loss += self.lpips_loss * tf.math.reduce_mean(self.compare_images(self.ref_weight * self.ref_img, self.ref_weight * generated_image))
-            #self.loss += self.mssim_loss * tf.math.reduce_mean(1-tf.image.ssim_multiscale(self.ref_weight * self.ref_img, self.ref_weight * generated_image, 1))
-            self.loss += self.vgg_loss * tf_custom_l1_loss(self.features_weight * self.ref_img_features, self.features_weight * generated_img_features)
+        if self.perc_model is not None and self.lpips_loss is not None:
+            self.loss += self.lpips_loss * tf.math.reduce_mean(self.compare_images(self.ref_weight * self.ref_img, self.ref_weight * generated_image))
         # + L1 penalty on dlatent weights
         if self.l1_penalty is not None:
             self.loss += self.l1_penalty * 512 * tf.math.reduce_mean(tf.math.abs(generator.dlatent_variable-generator.get_dlatent_avg()))

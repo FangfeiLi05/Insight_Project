@@ -49,8 +49,15 @@ for i in range(num_example):
         feature_grayhair[i] = [x['confidence'] for x in tempt if x['color'] == 'gray'][0] >= 0.95
         feature_otherhair[i] = [x['confidence'] for x in tempt if x['color'] == 'other'][0] >= 0.95
 
+#set(np.array([x['faceAttributes']['glasses'] for x in labels_data]))
+#{'NoGlasses', 'ReadingGlasses', 'Sunglasses', 'SwimmingGoggles'}
+feature_readingglasses = np.array([x['faceAttributes']['glasses'] == 'ReadingGlasses' for x in labels_data])
+feature_sunglasses = np.array([x['faceAttributes']['glasses'] == 'Sunglasses' for x in labels_data])
+feature_swimminggoggles = np.array([x['faceAttributes']['glasses'] == 'SwimmingGoggles' for x in labels_data])
+feature_glasses = feature_readingglasses + feature_sunglasses + feature_swimminggoggles
 
-feature_array = np.zeros((num_example, 23), dtype = float)
+
+feature_array = np.zeros((num_example, 24), dtype = float)
 feature_array[:,0] = feature_gender
 feature_array[:,1] = feature_age
 feature_array[:,2] = feature_smile
@@ -78,6 +85,9 @@ feature_array[:,19] = feature_blackhair
 feature_array[:,20] = feature_redhair
 feature_array[:,21] = feature_grayhair
 feature_array[:,22] = feature_otherhair
+
+feature_array[:,23] = feature_glasses
+
 
 feature_array_normalized = (feature_array - np.min(feature_array, axis=0))/(np.max(feature_array, axis=0) - np.min(feature_array, axis=0))
 
