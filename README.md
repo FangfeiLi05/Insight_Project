@@ -1,4 +1,17 @@
-## Deep Learning Portrait Editing using StyleGAN and Latent Space Manipulation
+## Portrait-GANerator -- Deep Learning for Portrait Editing
+
+This repository is for my 4 week project at [Insight Data Science](https://www.insightdatascience.com).
+
+
+* Google Slides presenting the core ideas of this project are available at [this link](***).
+* A blog post expaining more details about the motivation, analysis, and results will be posted soon.
+
+
+
+
+
+
+Portrait Editing using StyleGAN and Latent Space Manipulation
 
 
 ### StyleGAN encoder (codes from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
