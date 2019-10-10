@@ -13,6 +13,9 @@ Portrait-GANerator is a deep learning portrait editing pipline built based on St
 
 ![Image description](https://drive.google.com/open?id=1X3Z5Es8yuHO2z_NaOdFUcXYCUv-XO_wv)
 
+![Image description](https://drive.google.com/open?id=1QKtBHKhIQAHKfkzhbrPjvYkVBpp7EeXKv)
+
+
 
 ### StyleGAN encoder (codes from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
 
