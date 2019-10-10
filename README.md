@@ -2,16 +2,16 @@
 
 This repository is for my 4 week project at [Insight Data Science](https://www.insightdatascience.com).
 
+Portrait-GANerator is a deep learning portrait editing pipline built based on StyleGAN and latent space manipulation.
 
-* Google Slides presenting the core ideas of this project are available at [this link](***).
+* A Google Slides presenting the main ideas of this project is available [bit.ly/2nzoFBl](bit.ly/2nzoFBl).
 * A blog post expaining more details about the motivation, analysis, and results will be posted soon.
+* An GUI demo will be demonstrated in Kaggle soon.
 
 
 
 
 
-
-Portrait Editing using StyleGAN and Latent Space Manipulation
 
 
 ### StyleGAN encoder (codes from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
