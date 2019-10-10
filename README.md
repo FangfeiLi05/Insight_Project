@@ -9,7 +9,10 @@ Portrait-GANerator is a deep learning portrait editing pipline built based on St
 * An GUI demo will be demonstrated in Kaggle at [https://www.kaggle.com/fangfeili05/insight-project-demo/](https://www.kaggle.com/fangfeili05/insight-project-demo/).
 
 
-![pipline](ganerator_pipline.png)
+![Alt text](./figures_readme/ganerator_pipline.png)
+
+
+
 
 
 ### StyleGAN encoder (codes from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
