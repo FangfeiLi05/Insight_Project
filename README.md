@@ -9,7 +9,7 @@ Portrait-GANerator is a deep learning portrait editing pipline built based on St
 * An GUI demo will be demonstrated in Kaggle at [https://www.kaggle.com/fangfeili05/insight-project-demo/](https://www.kaggle.com/fangfeili05/insight-project-demo/).
 
 
-
+[![Product Name Screen Shot][product-screenshot]](https://drive.google.com/open?id=1X3Z5Es8yuHO2z_NaOdFUcXYCUv-XO_wv)
 
 
 
