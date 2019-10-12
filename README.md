@@ -2,11 +2,10 @@
 
 This repository is for my 4-week project at [Insight Data Science](https://www.insightdatascience.com).
 
-Portrait-GANerator is a deep learning portrait editing pipline built based on StyleGAN and latent space manipulation.
+Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN encoder ([@pbaylies](https://github.com/pbaylies/stylegan-encoder)) and latent space manipulation ([@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan)).
 
 * A Google Slides presenting the main ideas of this project is available [at this link](https://docs.google.com/presentation/d/1A2kYn3ROiRvGmY4l9Wl4ahF8fPFGcvkpsWgNYpymV4Y/edit#slide=id.g649c22c645_1_444).
 * A blog post expaining more details about the motivation, analysis, and results will be posted soon.
-* An GUI demo will be demonstrated in Kaggle at [https://www.kaggle.com/fangfeili05/insight-project-demo/](https://www.kaggle.com/fangfeili05/insight-project-demo/).
 
 
 ![Alt text](./figures_readme/ganerator_pipline.png)
@@ -17,21 +16,15 @@ Portrait-GANerator is a deep learning portrait editing pipline built based on St
 
 ### StyleGAN encoder (codes from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
 
-* Train a ResNet or EfficientNet. This trained model will convert a image to a latent vector (18*512), which is used 
-as the initial value in latent vector optimization in StyGAN encoder.
-
-
-    * Train a ResNet with *train_resnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l) and put it as *~/data/finetuned_resnet.h5*
-      ```
-      #python train_resnet.py --help   
-      python train_resnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
-      ```
+* Train a ResNet with *train_resnet.py*, or a EfficientNet with *train_effnet.py*. This trained model will convert a image to a latent vector (18*512), which is used as the initial value in latent vector optimization in StyGAN encoder.
+   ```
+   #python train_resnet.py --help
+   #python train_effnet.py --help
+      
+   python train_resnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
+   python train_effnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
+   ```
     
-    * Train a EfficientNet with *train_effnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1LFTlv0RFo2zXz2GKVEYZDBRL7wFIj5Cc) and put it as *~/data/finetuned_effnet.h5*
-      ```
-      #python train_effnet.py --help
-      python train_effnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
-      ```
 
 
 * Align images - center and crop images with *align_images.py*
