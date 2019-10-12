@@ -24,7 +24,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
    python train_resnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
    python train_effnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
    ```
-    
+<!-- You can also download a pre-trained ResNet [finetuned_resnet.h5]() or a pre-trained EfficientNet [finetuned_effnet.h5](), and put them in the folder *~/data/* -->    
 
 
 * Align images - center and crop images with *align_images.py*
