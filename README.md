@@ -7,6 +7,8 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 * A Google Slides presenting the main ideas of this project is available [at this link](https://docs.google.com/presentation/d/1A2kYn3ROiRvGmY4l9Wl4ahF8fPFGcvkpsWgNYpymV4Y/edit#slide=id.g649c22c645_1_444).
 * A blog post expaining more details about the motivation, analysis, and results will be posted soon.
 
+<!-- An GUI demo will be demonstrated [at this link]() in Kaggle. -->  
+
 
 ![Alt text](./figures_readme/ganerator_pipline.png)
 
