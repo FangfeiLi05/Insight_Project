@@ -17,7 +17,10 @@ Portrait-GANerator is a deep learning portrait editing pipline built based on St
 
 ### StyleGAN encoder (codes from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
 
-* Encoder preparation - train a ResNet or a EfficientNet that used in the encoder
+* Train a ResNet or EfficientNet. This trained model will convert a image to a latent vector (18*512), which is used 
+as the initial value in latent vector optimization in StyGAN encoder.
+
+
     * Train a ResNet with *train_resnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l) and put it as *~/data/finetuned_resnet.h5*
       ```
       #python train_resnet.py --help   
