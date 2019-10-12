@@ -20,16 +20,13 @@ Portrait-GANerator is a deep learning portrait editing pipline built based on St
 * Encoder preparation - train a ResNet or a EfficientNet that used in the encoder
     * Train a ResNet with *train_resnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l) and put it as *~/data/finetuned_resnet.h5*
       ```
-      #python train_resnet.py --help
-      #output '~/data/latent_feature_dataset.npy'
-      
+      #python train_resnet.py --help   
       python train_resnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
       ```
     
     * Train a EfficientNet with *train_effnet.py*, or [download a pre-trained model](https://drive.google.com/open?id=1LFTlv0RFo2zXz2GKVEYZDBRL7wFIj5Cc) and put it as *~/data/finetuned_effnet.h5*
       ```
       #python train_effnet.py --help
-      
       python train_effnet.py --test_size 256 --batch_size 1024 --loop 10 --max_patience 1
       ```
 
