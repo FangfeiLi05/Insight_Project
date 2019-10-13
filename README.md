@@ -45,7 +45,7 @@ NVIDIA K80 GPU -->
   ```
 
 
-* Encode images - encode images into latent representations ((18,512)), and reconstruct images using StyleGAN generator with *encode_images.py*
+* Convert each image into latent vector with `encode_images.py`.
   ```
   #lantent representations are stored in folder 'images_latent', and reconstructed images are stored in folder 'images_reconstructed'
   
