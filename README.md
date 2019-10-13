@@ -21,6 +21,8 @@ NVIDIA K80 GPU -->
 
 
 ### Set up the code and environment
+* Tested on Nvidia K80 GPU, with Anaconda Python 3.6
+
 * Clone this repository by running `git clone https://github.com/FangfeiLi05/Insight_Project.git` in terminal.
 
 * `cd` to the root directory of the project (the folder containing README.md)
@@ -29,7 +31,7 @@ NVIDIA K80 GPU -->
 
 
 
-### Convert image to latent vector (code from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
+### Encode image into latent vector (code from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
 * Train a ResNet with `train_resnet.py`, or a EfficientNet with `train_effnet.py`. This trained model will convert a image to a latent vector (18*512), which is used as the initial value in latent vector optimization in StyGAN encoder. You can also download a pre-trained ResNet [finetuned_resnet.h5](https://drive.google.com/open?id=12nM4KU7IBXGV5b5j1QV9f_3XQ2WmI8El) or a pre-trained EfficientNet [finetuned_effnet.h5](https://drive.google.com/open?id=12zWrGc3W0YuPANn3Rnl3OrNPskBO69fz), and put them in the folder `~/data/`.
   ```
   #python train_resnet.py --help
