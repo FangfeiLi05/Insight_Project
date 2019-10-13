@@ -21,7 +21,7 @@ def unpack_bz2(src_path):
 if __name__ == "__main__":
     """
     Extracts and aligns all faces from images using DLib and a function from original FFHQ dataset preparation step
-    python align_images.py /images_raw /images_aligned
+    python align_images.py /raw_images /aligned_images
     """
     parser = argparse.ArgumentParser(description='Align faces from input images', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
     parser.add_argument('raw_dir', help='Directory with raw images for face alignment')
@@ -31,12 +31,14 @@ if __name__ == "__main__":
     parser.add_argument('--y_scale', default=1, help='Scaling factor for y dimension', type=float)
     parser.add_argument('--em_scale', default=0.1, help='Scaling factor for eye-mouth distance', type=float)
     parser.add_argument('--use_alpha', default=False, help='Add an alpha channel for masking', type=bool)
-
+    
     args, other_args = parser.parse_known_args()
 
-    landmarks_model_path = unpack_bz2(get_file('shape_predictor_68_face_landmarks.dat.bz2', 
+    landmarks_model_path = unpack_bz2(get_file('shape_predictor_68_face_landmarks.dat.bz2',
                                                LANDMARKS_MODEL_URL, cache_subdir='temp'))
     RAW_IMAGES_DIR = args.raw_dir
+    
+    os.makedirs(args.aligned_dir, exist_ok=True) ####
     ALIGNED_IMAGES_DIR = args.aligned_dir
 
     landmarks_detector = LandmarksDetector(landmarks_model_path)
@@ -45,7 +47,6 @@ if __name__ == "__main__":
         try:
             raw_img_path = os.path.join(RAW_IMAGES_DIR, img_name)
             fn = face_img_name = '%s_%02d.png' % (os.path.splitext(img_name)[0], 1)
-            #fn = face_img_name = '%s_aligned_%02d.png' % (os.path.splitext(img_name)[0], 1)
             if os.path.isfile(fn):
                 continue
             print('Getting landmarks...')
@@ -53,7 +54,6 @@ if __name__ == "__main__":
                 try:
                     print('Starting face alignment...')
                     face_img_name = '%s_%02d.png' % (os.path.splitext(img_name)[0], i)
-                    #face_img_name = '%s_aligned_%02d.png' % (os.path.splitext(img_name)[0], i)
                     aligned_face_path = os.path.join(ALIGNED_IMAGES_DIR, face_img_name)
                     image_align(raw_img_path, aligned_face_path, face_landmarks, output_size=args.output_size, x_scale=args.x_scale, y_scale=args.y_scale, em_scale=args.em_scale, alpha=args.use_alpha)
                     print('Wrote result %s' % aligned_face_path)

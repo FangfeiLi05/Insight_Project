@@ -62,8 +62,7 @@ class PerceptualModel:
         if (self.l1_penalty <= self.epsilon):
             self.l1_penalty = None
         self.batch_size = batch_size
-        #if perc_model is not None and self.lpips_loss is not None:
-        if perc_model is not None:
+        if perc_model is not None and self.lpips_loss is not None:
             self.perc_model = perc_model
         else:
             self.perc_model = None
@@ -89,15 +88,15 @@ class PerceptualModel:
 
     def add_placeholder(self, var_name):
         var_val = getattr(self, var_name)
-        setattr(self, var_name + "_placeholder", tf.placeholder(var_val.dtype, shape=var_val.get_shape()))
-        setattr(self, var_name + "_op", var_val.assign(getattr(self, var_name + "_placeholder")))
+        setattr(self, var_name + '_placeholder', tf.placeholder(var_val.dtype, shape=var_val.get_shape()))
+        setattr(self, var_name + '_op', var_val.assign(getattr(self, var_name + '_placeholder')))
 
     def assign_placeholder(self, var_name, var_val):
-        self.sess.run(getattr(self, var_name + "_op"), {getattr(self, var_name + "_placeholder"): var_val})
+        self.sess.run(getattr(self, var_name + '_op'), {getattr(self, var_name + '_placeholder'): var_val})
 
     def build_perceptual_model(self, generator):
         # Learning rate
-        global_step = tf.Variable(0, dtype=tf.int32, trainable=False, name="global_step")
+        global_step = tf.Variable(0, dtype=tf.int32, trainable=False, name='global_step')
         incremented_global_step = tf.assign_add(global_step, 1)
         self._reset_global_step = tf.assign(global_step, 0)
         self.learning_rate = tf.train.exponential_decay(self.lr, incremented_global_step,
@@ -112,8 +111,8 @@ class PerceptualModel:
                                                 dtype='float32', initializer=tf.initializers.zeros())
         self.ref_weight = tf.get_variable('ref_weight', shape=generated_image.shape,
                                                dtype='float32', initializer=tf.initializers.zeros())
-        self.add_placeholder("ref_img")
-        self.add_placeholder("ref_weight")
+        self.add_placeholder('ref_img')
+        self.add_placeholder('ref_weight')
 
         if (self.vgg_loss is not None):
             vgg16 = VGG16(include_top=False, input_shape=(self.img_size, self.img_size, 3))
@@ -124,8 +123,8 @@ class PerceptualModel:
             self.features_weight = tf.get_variable('features_weight', shape=generated_img_features.shape,
                                                dtype='float32', initializer=tf.initializers.zeros())
             self.sess.run([self.features_weight.initializer, self.features_weight.initializer])
-            self.add_placeholder("ref_img_features")
-            self.add_placeholder("features_weight")
+            self.add_placeholder('ref_img_features')
+            self.add_placeholder('features_weight')
 
         self.loss = 0
         # L1 loss on VGG16 features
@@ -138,11 +137,8 @@ class PerceptualModel:
         if (self.mssim_loss is not None):
             self.loss += self.mssim_loss * tf.math.reduce_mean(1-tf.image.ssim_multiscale(self.ref_weight * self.ref_img, self.ref_weight * generated_image, 1))
         # + extra perceptual loss on image pixels
-        #if (self.lpips_loss is not None) and (self.perc_model is not None):
-        if (self.lpips_loss is not None):
-            #self.loss += self.lpips_loss * tf.math.reduce_mean(self.compare_images(self.ref_weight * self.ref_img, self.ref_weight * generated_image))
-            #self.loss += self.mssim_loss * tf.math.reduce_mean(1-tf.image.ssim_multiscale(self.ref_weight * self.ref_img, self.ref_weight * generated_image, 1))
-            self.loss += self.vgg_loss * tf_custom_l1_loss(self.features_weight * self.ref_img_features, self.features_weight * generated_img_features)
+        if self.perc_model is not None and self.lpips_loss is not None:
+            self.loss += self.lpips_loss * tf.math.reduce_mean(self.compare_images(self.ref_weight * self.ref_img, self.ref_weight * generated_image))
         # + L1 penalty on dlatent weights
         if self.l1_penalty is not None:
             self.loss += self.l1_penalty * 512 * tf.math.reduce_mean(tf.math.abs(generator.dlatent_variable-generator.get_dlatent_avg()))
@@ -191,7 +187,7 @@ class PerceptualModel:
                     _, img_name = os.path.split(images_list[i])
                     mask_img = os.path.join(self.mask_dir, f'{img_name}')
                     if (os.path.isfile(mask_img)):
-                        print("Loading mask " + mask_img)
+                        print('Loading mask ' + mask_img)
                         imask = PIL.Image.open(mask_img).convert('L')
                         mask = np.array(imask)/255
                         mask = np.expand_dims(mask,axis=-1)
@@ -199,12 +195,12 @@ class PerceptualModel:
                         mask = self.generate_face_mask(im)
                         imask = (255*mask).astype('uint8')
                         imask = PIL.Image.fromarray(imask, 'L')
-                        print("Saving mask " + mask_img)
+                        print('Saving mask ' + mask_img)
                         imask.save(mask_img, 'PNG')
                         mask = np.expand_dims(mask,axis=-1)
                     mask = np.ones(im.shape,np.float32) * mask
                 except Exception as e:
-                    print("Exception in mask handling for " + mask_img)
+                    print('Exception in mask handling for ' + mask_img)
                     traceback.print_exc()
                     mask = np.ones(im.shape[:2],np.uint8)
                     mask = np.ones(im.shape,np.float32) * np.expand_dims(mask,axis=-1)
@@ -232,10 +228,10 @@ class PerceptualModel:
             loaded_image = np.vstack([loaded_image, np.zeros(empty_images_space)])
 
         if image_features is not None:
-            self.assign_placeholder("features_weight", weight_mask)
-            self.assign_placeholder("ref_img_features", image_features)
-        self.assign_placeholder("ref_weight", image_mask)
-        self.assign_placeholder("ref_img", loaded_image)
+            self.assign_placeholder('features_weight', weight_mask)
+            self.assign_placeholder('ref_img_features', image_features)
+        self.assign_placeholder('ref_weight', image_mask)
+        self.assign_placeholder('ref_img', loaded_image)
 
     def optimize(self, vars_to_optimize, iterations=200):
         vars_to_optimize = vars_to_optimize if isinstance(vars_to_optimize, list) else [vars_to_optimize]
@@ -246,4 +242,4 @@ class PerceptualModel:
         fetch_ops = [min_op, self.loss, self.learning_rate]
         for _ in range(iterations):
             _, loss, lr = self.sess.run(fetch_ops)
-            yield {"loss":loss, "lr": lr}
+            yield {'loss':loss, 'lr': lr}

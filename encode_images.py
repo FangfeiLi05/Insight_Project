@@ -37,8 +37,6 @@ def main():
     parser.add_argument('--decay_steps', default=10, help='Decay steps for learning rate decay (as a percent of iterations)', type=float)
     parser.add_argument('--load_effnet', default='data/finetuned_effnet.h5', help='Model to load for EfficientNet approximation of dlatents')
     parser.add_argument('--load_resnet', default='data/finetuned_resnet.h5', help='Model to load for ResNet approximation of dlatents')
-    #parser.add_argument('--load_effnet', default='https://drive.google.com/open?id=1LFTlv0RFo2zXz2GKVEYZDBRL7wFIj5Cc', help='Load a EfficientNet model for approximation of dlatents from this URL') #finetuned_effnet_pretrained.h5
-    #parser.add_argument('--load_resnet', default='https://drive.google.com/open?id=1tZLucJ1pZ8GA9JTRwF9d-Thr0zhR-i6l', help='Load a ResNet model for approximation of dlatents from this URL') #finetuned_resnet_pretrained.h5
 
     # Loss function options
     parser.add_argument('--use_vgg_loss', default=0.4, help='Use VGG perceptual loss; 0 to disable, > 0 to scale.', type=float)
@@ -73,8 +71,7 @@ def main():
 
     if args.output_video:
         import cv2
-        synthesis_kwargs = dict(output_transform=dict(func=tflib.convert_images_to_uint8, nchw_to_nhwc=False), 
-                                minibatch_size=args.batch_size)
+        synthesis_kwargs = dict(output_transform=dict(func=tflib.convert_images_to_uint8, nchw_to_nhwc=False), minibatch_size=args.batch_size)
 
     ref_images = [os.path.join(args.src_dir, x) for x in os.listdir(args.src_dir)]
     ref_images = list(filter(os.path.isfile, ref_images))
@@ -98,14 +95,10 @@ def main():
         generator.set_dlatent_avg(np.load(args.dlatent_avg))
 
     perc_model = None
-    with dnnlib.util.open_url('https://drive.google.com/uc?id=1N2-m9qszOeVC9Tq77WxsLnuWwOedQiD2', 
-                              cache_dir=config.cache_dir) as f:
-        perc_model =  pickle.load(f)
-    
-    #if (args.use_lpips_loss > 0.00000001):
-    #    with dnnlib.util.open_url('https://drive.google.com/uc?id=1N2-m9qszOeVC9Tq77WxsLnuWwOedQiD2', 
-    #                              cache_dir=config.cache_dir) as f:
-    #        perc_model =  pickle.load(f)
+    if (args.use_vgg_loss > 0.00000001):
+        with dnnlib.util.open_url('https://drive.google.com/uc?id=1N2-m9qszOeVC9Tq77WxsLnuWwOedQiD2', cache_dir=config.cache_dir) as f:
+            perc_model =  pickle.load(f)
+            
     perceptual_model = PerceptualModel(args, perc_model=perc_model, batch_size=args.batch_size)
     perceptual_model.build_perceptual_model(generator)
 
@@ -117,23 +110,13 @@ def main():
         if args.output_video:
             video_out = {}
             for name in names:
-                video_out[name] = cv2.VideoWriter(os.path.join(args.video_dir, f'{name}.avi'), 
-                                                  cv2.VideoWriter_fourcc(*args.video_codec), 
-                                                  args.video_frame_rate, (args.video_size,args.video_size))
-                #name_video = name[0:6] + '_video' + name[-1:-2] + name[-3:]
-                #video_out[name] = cv2.VideoWriter(os.path.join(args.video_dir, f'{name_video}.avi'), 
-                #                                  cv2.VideoWriter_fourcc(*args.video_codec), 
-                #                                  args.video_frame_rate, (args.video_size,args.video_size))
-                
+                video_out[name] = cv2.VideoWriter(os.path.join(args.video_dir, f'{name}.avi'),cv2.VideoWriter_fourcc(*args.video_codec), args.video_frame_rate, (args.video_size,args.video_size))
 
         perceptual_model.set_reference_images(images_batch)
         dlatents = None
         if (args.load_last != ''): # load previous dlatents for initialization
             for name in names:
                 dl = np.expand_dims(np.load(os.path.join(args.load_last, f'{name}.npy')),axis=0)
-                #name_latent = name[0:6] + '_latent' + name[-1:-2] + name[-3:]
-                #dl = np.expand_dims(np.load(os.path.join(args.load_last, f'{name_latent}.npy')),axis=0)
-                
                 if (dlatents is None):
                     dlatents = dl
                 else:
@@ -160,7 +143,7 @@ def main():
         best_loss = None
         best_dlatent = None
         for loss_dict in pbar:
-            pbar.set_description(' '.join(names) + ': ' + '; '.join(['{} {:.4f}'.format(k, v)
+            pbar.set_description(" ".join(names) + ": " + "; ".join(["{} {:.4f}".format(k, v)
                     for k, v in loss_dict.items()]))
             if best_loss is None or loss_dict['loss'] < best_loss:
                 best_loss = loss_dict['loss']
@@ -168,11 +151,12 @@ def main():
             if args.output_video and (vid_count % args.video_skip == 0):
                 batch_frames = generator.generate_images()
                 for i, name in enumerate(names):
-                    video_frame = PIL.Image.fromarray(batch_frames[i], 
+                    video_frame = PIL.Image.fromarray(batch_frames[i],
                                                       'RGB').resize((args.video_size,args.video_size),PIL.Image.LANCZOS)
-                    video_out[name].write(cv2.cvtColor(np.array(video_frame).astype('uint8'), cv2.COLOR_RGB2BGR))
+                    video_out[name].write(cv2.cvtColor(np.array(video_frame).astype('uint8'), 
+                                                       cv2.COLOR_RGB2BGR))
             generator.stochastic_clip_dlatents()
-        print(' '.join(names), ' Loss {:.4f}'.format(best_loss))
+        print(" ".join(names), " Loss {:.4f}".format(best_loss))
 
         if args.output_video:
             for name in names:
@@ -186,11 +170,6 @@ def main():
             img = PIL.Image.fromarray(img_array, 'RGB')
             img.save(os.path.join(args.generated_images_dir, f'{img_name}.png'), 'PNG')
             np.save(os.path.join(args.dlatent_dir, f'{img_name}.npy'), dlatent)
-            
-            #name_reconstructed = name[0:6] + '_reconstructed' + img_name[-1:-2] + name[-3:]
-            #img.save(os.path.join(args.generated_images_dir, f'{name_reconstructed}.png'), 'PNG')
-            #name_latent = name[0:6] + '_latent' + img_name[-1:-2] + name[-3:]
-            #np.save(os.path.join(args.dlatent_dir, f'{name_latent}.npy'), dlatent)
 
         generator.reset_dlatents()
 
