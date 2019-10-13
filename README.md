@@ -54,56 +54,41 @@ NVIDIA K80 GPU -->
   ```
 
 
-### Latent space manipulation
-* Generate dataset - generate dataset cotaining the latent representation (20307, 18*512) and corresponding 24 features (20307, 24) of 20,307 images, with *latent_feature_dataset.py*. Features are `Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair, Glasses`. Original dataset is from [original dataset](https://drive.google.com/uc?id=1xMM3AFq0r014IIhBLiMCjKJJvbhLUQ9t). 
-  ```
-  #output '~/data/latent_feature_dataset.npy'
-  
-  python latent_feature_dataset.py
+
+### Identify feature axis in latent space
+
+* Train a generalized linear model to get 16 normalized and orthogonal feature axes (`Gender, Makeup, Glasses, Age, Smile, Anger, Contempt, Disgust, Fear, Neutral, Sadness, Surprise, Beard, Bald, BlondHair, BlackHair`) in the latent space, with `feature_axis.py`. You can also download pre-trained feature axes [feature_axis.h5](https://drive.google.com/open?id=1TFHtjZTpZqcZLt8Ovx54XeoT-wHZXkgc), and put them in the folder `~/data/`.
+<!-- A latent training dataset is [at this link](https://drive.google.com/uc?id=1xMM3AFq0r014IIhBLiMCjKJJvbhLUQ9t). -->
+  ```  
+  python feature_axis.py
   ```
 
 
-* Identify feature axes - train a logistic regression model (not sure what this model should be called) to get feature axes normalized and orthogonal with *feature_axes.py*, or [download a pre-trained model](https://drive.google.com/open?id=1G_a48GFl9SPgXKui5Z2aY-aH5gUi6sR2) and put it as *~/data/feature_axis.npy*
+* Tune each feature in the latent space and reconstruct the image.
   ```
-  #output '~/data/feature_axis.npy'
-  
-  python feature_axes.py
-  ```
-
-* Tune features - functions used to tune features continousely and show image
-  ```
+  import pandas as pd
   import numpy as np
-  import PIL
-  from manipulate_latent import latent_to_imageRGB
+  from PIL import Image
+  from manipulate_latent import latent_to_imageRGB, latent_to_image, tune_latent
   
-  image_latent = np.load('./images_latent/000001_01.npy')
+  display(Image.open('./images_raw/000001.jpg'))   # Original image
+  
+  display(Image.open('./images_aligned/000001_01.png').resize((256,256)))   # Aligned image
   
   image_array = latent_to_imageRGB(image_latent)
-  PIL.Image.fromarray(image_array, 'RGB').resize((256,256), PIL.Image.LANCZOS)
+  Image.fromarray(image_array, 'RGB').resize((256,256), PIL.Image.LANCZOS)
+  image_latent = np.load('./images_latent/000001_01.npy')
+  latent_to_image(image_latent)   # Reconstructed photo
+
+  feature_axis_DataFrame = pd.read_hdf('./data/feature_axis.h5', 'df')
+  feature_axis_array = np.array(feature_axis_DataFrame)
+  i = 15
+  direction = feature_axis_array[:,i].reshape((18, 512))
+  coeff = 10
+  image_latent_tuned = tune_latent(image_latent, direction, coeff, list(range(8)))
+  latent_to_image(image_latent_tuned)   # Feature-tuned photo
   ```
 
-  ```
-  import numpy as np
-  from manipulate_latent import latent_to_image
-  
-  image_latent = np.load('./images_latent/000001_01.npy')
-  
-  latent_to_image(image_latent)
-  ```
-  
-  ```
-  import numpy as np
-  from manipulate_latent import latent_to_image
-  from manipulate_latent import tune_latent
-  
-  feature_axis = np.load('./data/feature_axis.npy')
-  i = 0
-  direction = feature_axis[:,i].reshape((18, 512))
-  coeff = 5
-  
-  image_latent_tuned = tune_latent(image_latent, direction, coeff, list(range(8))
-  latent_to_image(image_latent_tuned)
-  ```
 
 
 ### Results demonstration
