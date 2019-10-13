@@ -1,7 +1,6 @@
-## Portrait-GANerator: Deep Learning Portrait Editing
+## Portrait-GANerator: Deep Learning for Portrait Editing
 
-This repository is for my 4-week project at [Insight Data Science](https://www.insightdatascience.com): **Portrait-GANerator
-Deep Learning for Portrait Editing**.
+This repository is for my 4-week project at [Insight Data Science](https://www.insightdatascience.com): **Portrait-GANerator - Deep Learning for Portrait Editing**.
 
 Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN encoder ([@pbaylies](https://github.com/pbaylies/stylegan-encoder)) and latent space manipulation ([@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan)). The 
 
