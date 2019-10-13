@@ -105,7 +105,5 @@ NVIDIA K80 GPU -->
 
 
 ### Results demonstration
-* To be continued
-* Requirements needed to install
-* GUI
+
 
