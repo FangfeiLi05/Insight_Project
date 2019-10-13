@@ -20,13 +20,14 @@ p2.xlarge: Ubuntu 16.04+k 80 GPU
 NVIDIA K80 GPU -->
 
 
-### Set up
-* Clone this repository.
-  ```
-  git clone https://github.com/FangfeiLi05/Insight_Project.git
-  ``` 
+### Set up the code and environment
+* Clone this repository by running `git clone https://github.com/FangfeiLi05/Insight_Project.git` in terminal.
 
-<!--  to the root directory of the project (the folder containing the README.md)-->
+* `cd` to the root directory of the project (the folder containing README.md)
+
+* Install dependencies by running `pip install -r requirements.txt` in terminal.
+
+
 
 
 
