@@ -20,6 +20,7 @@ p2.xlarge: Ubuntu 16.04+k 80 GPU
 NVIDIA K80 GPU -->
 
 
+### Set up
 * Clone this repository.
   ```
   git clone https://github.com/FangfeiLi05/Insight_Project.git
@@ -29,6 +30,7 @@ NVIDIA K80 GPU -->
 
 
 
+### Convert image to latent vector 
 * Train a ResNet with `train_resnet.py`, or a EfficientNet with `train_effnet.py`. This trained model will convert a image to a latent vector (18*512), which is used as the initial value in latent vector optimization in StyGAN encoder. You can also download a pre-trained ResNet [finetuned_resnet.h5](https://drive.google.com/open?id=12nM4KU7IBXGV5b5j1QV9f_3XQ2WmI8El) or a pre-trained EfficientNet [finetuned_effnet.h5](https://drive.google.com/open?id=12zWrGc3W0YuPANn3Rnl3OrNPskBO69fz), and put them in the folder `~/data/`.
   ```
   #python train_resnet.py --help
@@ -51,6 +53,7 @@ NVIDIA K80 GPU -->
   ```
 
 
+### Latent space manipulation
 * Generate dataset - generate dataset cotaining the latent representation (20307, 18*512) and corresponding 23 features (20307, 23) of 20,307 images, with *latent_feature_dataset.py*. Features are *Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair*. Original dataset is from [original dataset](https://drive.google.com/uc?id=1xMM3AFq0r014IIhBLiMCjKJJvbhLUQ9t). 
   ```
   #output '~/data/latent_feature_dataset.npy'
