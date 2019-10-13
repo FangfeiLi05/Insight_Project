@@ -19,6 +19,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 p2.xlarge: Ubuntu 16.04+k 80 GPU
 NVIDIA K80 GPU -->
 
+
 * Clone this repository.
   ```
   git clone https://github.com/FangfeiLi05/Insight_Project.git
@@ -50,7 +51,6 @@ NVIDIA K80 GPU -->
   ```
 
 
-### Latent space manipulation (reference from [@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan))
 * Generate dataset - generate dataset cotaining the latent representation (20307, 18*512) and corresponding 23 features (20307, 23) of 20,307 images, with *latent_feature_dataset.py*. Features are *Gender, Age, Smile, EyeMakeup, LipMakeup, Anger, Contempt, Disgust, Fear, Happiness, Neutral, Sadness, Surprise, Beard, Moustache, Sideburns, Bald, BlondHair, BrownHair, BlackHair, RedHair, GrayHair, OtherHair*. Original dataset is from [original dataset](https://drive.google.com/uc?id=1xMM3AFq0r014IIhBLiMCjKJJvbhLUQ9t). 
   ```
   #output '~/data/latent_feature_dataset.npy'
