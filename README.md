@@ -1,4 +1,4 @@
-## Portrait-GANerator -- Portrait Editing using StyleGAN and Latent  Space Manipulation
+## Portrait-GANerator -- Deep Learning Portrait Editing
 
 This repository is for my 4-week project at [Insight Data Science](https://www.insightdatascience.com).
 
