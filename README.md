@@ -40,7 +40,7 @@ NVIDIA K80 GPU -->
 
 * Align (center and crop) images with `align_images.py`.
   ```
-  mkdir images_aligned  #a folder is needed to store aligned images
+  mkdir images_aligned  #a folder to store aligned images
 
   python align_images.py images_raw/ images_aligned/
   ```
