@@ -37,9 +37,8 @@ NVIDIA K80 GPU -->
   python train_effnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
   ``` 
 
-* Make a folder *~/images_raw 
 
-* Align (center and crop) images with *align_images.py*
+* Align (center and crop) images with `align_images.py`.
   ```
   mkdir images_aligned  #a folder is needed to store aligned images
 
