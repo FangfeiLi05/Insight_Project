@@ -1,3 +1,4 @@
+#manipulate_latent.py: function to tune the latent vector along feature axis, and styGAN generator
 import pickle
 import config
 import dnnlib
@@ -13,7 +14,7 @@ with dnnlib.util.open_url(URL_FFHQ, cache_dir=config.cache_dir) as f:
     generator_network, discriminator_network, Gs_network = pickle.load(f)
 
 def latent_to_image(latent_vector):
-    #latent_vector.shape = (18,512)
+    #latent_vector is (18,512)
     latent_vector = np.expand_dims(latent_vector ,axis=0)
     synthesis_kwargs = dict(output_transform=dict(func=tflib.convert_images_to_uint8, nchw_to_nhwc=False))
     images = Gs_network.components.synthesis.run(latent_vector, randomize_noise=False, **synthesis_kwargs)
@@ -23,7 +24,6 @@ def latent_to_image(latent_vector):
 
 
 def latent_to_imageRGB(latent_vector):
-    #latent_vector.shape = (18,512)
     latent_vector = np.expand_dims(latent_vector ,axis=0)
     synthesis_kwargs = dict(output_transform=dict(func=tflib.convert_images_to_uint8, nchw_to_nhwc=False))
     images = Gs_network.components.synthesis.run(latent_vector, randomize_noise=False, **synthesis_kwargs)
@@ -32,7 +32,6 @@ def latent_to_imageRGB(latent_vector):
 
 
 def tune_latent(latent_vector, direction, coeff, layers=list(range(0,18))):
-    #latent_vector.shape = (18,512)
     new_latent_vector = latent_vector.copy()
     new_latent_vector[layers] = (latent_vector + coeff*direction)[layers]
     return new_latent_vector
