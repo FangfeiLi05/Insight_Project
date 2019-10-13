@@ -47,9 +47,7 @@ NVIDIA K80 GPU -->
 
 * Convert each image in the folder `~/images_aligned/` into a latent vector with `encode_images.py`. The lantent representations are stored in the folder `~/images_latent/`. The reconstructed images are also outputted to a folder `~/images_reconstructed/`.
   ```
-  #lantent representations are stored in folder 'images_latent', and reconstructed images are stored in folder 'images_reconstructed'
-  
-  python ./encode_images.py --batch_size=2 --output_video=True --load_effnet=data/finetuned_effnet.h5 images_aligned/ images_reconstructed/ images_latent/
+  python ./encode_images.py --batch_size=1 --output_video=True --load_effnet=data/finetuned_effnet.h5 images_aligned/ images_reconstructed/ images_latent/
   ```
 
 
