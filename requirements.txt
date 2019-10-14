@@ -8,6 +8,6 @@ Pillow>=5.2.0
 ipywidgets>=7.4.0
 tensorboard>=1.14.0
 keras>=2.2.4
-tensorflow-gpu>=1.14.0
+tensorflow-gpu==1.14.0
 efficientnet
 opencv-python>=3.4.2
