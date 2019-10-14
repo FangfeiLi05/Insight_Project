@@ -1,8 +1,8 @@
 #feature_axis.py: identify the normalized and orthogonalized feature axes in the latent space.
 import numpy as np
 import pandas as pd
-import dnnlib as dnnlib
-import config as config
+import dnnlib
+import config
 import pickle
 import gzip
 import keras
