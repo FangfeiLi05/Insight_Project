@@ -4,7 +4,7 @@ This repository is for my 4-week project at [Insight Data Science](https://www.i
 
 
 
-### Main ideas
+### Basic ideas
 Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN encoder ([@pbaylies](https://github.com/pbaylies/stylegan-encoder)) and latent space manipulation ([@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan)). 
 * The StyleGAN encoder can convert a image into a latent vector (18*512) in the latent space, by optimizing the perceptual loss of the original image and the reconstructed image. The reconstruced image is from its latent vector after going through the pre-trained StyleGAN generator. This takes ~2 minutes running in GPU per image. 
 
@@ -29,8 +29,9 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 
 
+### Instructions on running code
 
-### Set up the code and environment
+#### Set up code environment
 * Tested on Nvidia K80 GPU, with Anaconda Python 3.6
 
 * Clone this repository by running `git clone https://github.com/FangfeiLi05/Insight_Project.git` in terminal.
@@ -41,7 +42,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 
 
-### Encode image into latent vector (code from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
+#### Encode image into latent vector (code from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
 * Train a ResNet with `train_resnet.py`, or a EfficientNet with `train_effnet.py`. This trained model will convert a image to a latent vector (18*512), which is used as the initial value in latent vector optimization in StyGAN encoder. You can also download a pre-trained ResNet [finetuned_resnet.h5](https://drive.google.com/open?id=12nM4KU7IBXGV5b5j1QV9f_3XQ2WmI8El) or a pre-trained EfficientNet [finetuned_effnet.h5](https://drive.google.com/open?id=12zWrGc3W0YuPANn3Rnl3OrNPskBO69fz), and put them in the folder `~/data/`.
   ```
   #python train_resnet.py --help
@@ -51,12 +52,10 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
   python train_effnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
   ``` 
 
-
 * Align (center and crop) images with `align_images.py`. The aligned images are stored in the folder `~/images_aligned/`
   ```
   python align_images.py images_raw/ images_aligned/
   ```
-
 
 * Convert each image in the folder `~/images_aligned/` into a latent vector with `encode_images.py`. The lantent representations are stored in the folder `~/images_latent/`. The reconstructed images are also outputted to a folder `~/images_reconstructed/`.
   ```
@@ -65,14 +64,14 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 
 
-### Identify feature axis in latent space
-
+#### Identify feature axes in latent space
 * Train a generalized linear model to get 16 normalized and orthogonal feature axes (`Gender, Makeup, Glasses, Age, Smile, Anger, Contempt, Disgust, Fear, Neutral, Sadness, Surprise, Beard, Bald, BlondHair, BlackHair`) in the latent space, with `feature_axis.py`. You can also download pre-trained feature axes [feature_axis.h5](https://drive.google.com/open?id=1TFHtjZTpZqcZLt8Ovx54XeoT-wHZXkgc), and put them in the folder `~/data/`.
   ```  
   python feature_axis.py
   ```
-
-
+  
+ 
+#### Tune features of a image
 * Tune each feature in the latent space and reconstruct the image.
   ```
   import pandas as pd
@@ -100,6 +99,6 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 
 
-### Results demonstration
+### Results
 
 
