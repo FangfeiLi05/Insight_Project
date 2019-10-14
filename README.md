@@ -14,7 +14,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 <!-- Introduction of PG-GAN (generate random photo-realistic images from random noise vectors in the latent space), TL-GAN ( control features of the generated images), StyleGAN (need to read the papaer carefully), StyleGAN encoder (how it works). -->
 
-![Alt text](./figures_readme/ganerator_pipline.png)
+![Alt text](./static/ganerator_pipline.png)
 
 
 
