@@ -29,7 +29,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 
 
-### Instructions on running code
+### Instructions on running code pipeline
 
 #### 1. Code environment setting
 * Tested on Nvidia K80 GPU, with Anaconda Python 3.6
