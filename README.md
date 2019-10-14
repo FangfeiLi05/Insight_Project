@@ -102,4 +102,4 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 ### Results
 
-
+![Alt text](./static/demo_example1.png)
