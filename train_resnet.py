@@ -94,7 +94,7 @@ def generate_dataset(n=10000, save_path=None, seed=None, model_res=1024, image_s
     return W, X
 
 def is_square(n):
-  return (n == int(math.sqrt(n) + 0.5)**2)
+    return (n == int(math.sqrt(n) + 0.5)**2)
   
 def get_resnet_model(save_path, model_res=1024, image_size=256, depth=2, size=0, activation='elu', loss='logcosh', optimizer='adam'):
     # Build model

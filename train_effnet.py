@@ -112,7 +112,7 @@ def generate_dataset(n=10000, save_path=None, seed=None, model_res=1024, image_s
     return W, X
 
 def is_square(n):
-  return (n == int(math.sqrt(n) + 0.5)**2)
+    return (n == int(math.sqrt(n) + 0.5)**2)
   
 def get_effnet_model(save_path, model_res=1024, image_size=256, depth=1, size=3, activation='elu', loss='logcosh', optimizer='adam'):
 
@@ -134,12 +134,12 @@ def get_effnet_model(save_path, model_res=1024, image_size=256, depth=1, size=3,
 
     layer_size = model_scale*8*8*8
     if is_square(layer_size): # work out layer dimensions
-      layer_l = int(math.sqrt(layer_size)+0.5)
-      layer_r = layer_l
+        layer_l = int(math.sqrt(layer_size)+0.5)
+        layer_r = layer_l
     else:
-      layer_m = math.log(math.sqrt(layer_size),2)
-      layer_l = 2**math.ceil(layer_m)
-      layer_r = layer_size // layer_l
+        layer_m = math.log(math.sqrt(layer_size),2)
+        layer_l = 2**math.ceil(layer_m)
+        layer_r = layer_size // layer_l
     layer_l = int(layer_l)
     layer_r = int(layer_r)
 
