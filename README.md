@@ -31,7 +31,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 ### Instructions on running code
 
-#### 1. Set up code environment
+#### 1. Code environment setting
 * Tested on Nvidia K80 GPU, with Anaconda Python 3.6
 
 * Clone this repository by running `git clone https://github.com/FangfeiLi05/Insight_Project.git` in terminal.
@@ -42,7 +42,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 
 
-#### 2. Embed image into latent vector (code from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
+#### 2. Image-to-latent vector embedding (code from [@pbaylies](https://github.com/pbaylies/stylegan-encoder))
 * Train a ResNet with `train_resnet.py`, or a EfficientNet with `train_effnet.py`. This trained model will convert a image to a latent vector (18*512), which is used as the initial value in latent vector optimization in StyGAN encoder. You can also download a pre-trained ResNet [finetuned_resnet.h5](https://drive.google.com/open?id=12nM4KU7IBXGV5b5j1QV9f_3XQ2WmI8El) or a pre-trained EfficientNet [finetuned_effnet.h5](https://drive.google.com/open?id=12zWrGc3W0YuPANn3Rnl3OrNPskBO69fz), and put them in the folder `~/data/`.
   ```
   #python train_resnet.py --help
@@ -64,14 +64,14 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 
 
-#### 3. Identify feature axes in latent space
+#### 3. Feature axes identification
 * Train a GLM to get 16 normalized and orthogonal feature axes (`Gender, Makeup, Glasses, Age, Smile, Anger, Contempt, Disgust, Fear, Neutral, Sadness, Surprise, Beard, Bald, BlondHair, BlackHair`) in the latent space, with `feature_axis.py`. You can also download pre-trained feature axes [feature_axis.h5](https://drive.google.com/open?id=1TFHtjZTpZqcZLt8Ovx54XeoT-wHZXkgc), and put them in the folder `~/data/`.
   ```  
   python feature_axis.py
   ```
   
  
-#### 4. Tune features of a image
+#### 4. Feature tuning
 * Tune each feature in the latent space and reconstruct the image.
   ```
   import pandas as pd
