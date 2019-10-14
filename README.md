@@ -65,7 +65,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 
 #### 3. Identify feature axes in latent space
-* Train a generalized linear model to get 16 normalized and orthogonal feature axes (`Gender, Makeup, Glasses, Age, Smile, Anger, Contempt, Disgust, Fear, Neutral, Sadness, Surprise, Beard, Bald, BlondHair, BlackHair`) in the latent space, with `feature_axis.py`. You can also download pre-trained feature axes [feature_axis.h5](https://drive.google.com/open?id=1TFHtjZTpZqcZLt8Ovx54XeoT-wHZXkgc), and put them in the folder `~/data/`.
+* Train a GLM to get 16 normalized and orthogonal feature axes (`Gender, Makeup, Glasses, Age, Smile, Anger, Contempt, Disgust, Fear, Neutral, Sadness, Surprise, Beard, Bald, BlondHair, BlackHair`) in the latent space, with `feature_axis.py`. You can also download pre-trained feature axes [feature_axis.h5](https://drive.google.com/open?id=1TFHtjZTpZqcZLt8Ovx54XeoT-wHZXkgc), and put them in the folder `~/data/`.
   ```  
   python feature_axis.py
   ```
@@ -86,7 +86,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
   image_array = latent_to_imageRGB(image_latent)
   Image.fromarray(image_array, 'RGB').resize((256,256), PIL.Image.LANCZOS)
   image_latent = np.load('./images_latent/000001_01.npy')
-  latent_to_image(image_latent)   # Reconstructed photo
+  latent_to_image(image_latent)   # Reconstructed image
 
   feature_axis_DataFrame = pd.read_hdf('./data/feature_axis.h5', 'df')
   feature_axis_array = np.array(feature_axis_DataFrame)
@@ -94,7 +94,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
   direction = feature_axis_array[:,i].reshape((18, 512))
   coeff = 10
   image_latent_tuned = tune_latent(image_latent, direction, coeff, list(range(8)))
-  latent_to_image(image_latent_tuned)   # Feature-tuned photo
+  latent_to_image(image_latent_tuned)   # Feature-tuned image
   ```
 
 
