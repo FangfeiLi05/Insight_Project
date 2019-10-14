@@ -14,6 +14,8 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 <!-- Introduction of PG-GAN (generate random photo-realistic images from random noise vectors in the latent space), TL-GAN ( control features of the generated images), StyleGAN (need to read the papaer carefully), StyleGAN encoder (how it works). -->
 
+![Alt text](./figures_readme/ganerator_pipline.png)
+
 
 
 ### Resources
@@ -23,15 +25,9 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 <!-- An GUI demo will be demonstrated [at this link]() in Kaggle. -->  
 
-
-![Alt text](./figures_readme/ganerator_pipline.png)
-
-
 <!-- All the following in root directory -->
 
-<!-- Tested on Nvidia K80 GPU with CUDA 9.0, with Anaconda Python 3.6
-p2.xlarge: Ubuntu 16.04+k 80 GPU
-NVIDIA K80 GPU -->
+
 
 
 ### Set up the code and environment
