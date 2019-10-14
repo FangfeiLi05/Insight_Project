@@ -1,10 +1,24 @@
 ## Portrait-GANerator &mdash; Deep Learning for Portrait Editing
 
-This repository is for my 4-week project at [Insight Data Science](https://www.insightdatascience.com): **Portrait-GANerator &mdash; Deep Learning for Portrait Editing**. Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN encoder ([@pbaylies](https://github.com/pbaylies/stylegan-encoder)) and latent space manipulation ([@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan)). The StyleGAN encoder can convert a image into a latent vector (18*512) in the latent space, by optimizing the perceptual loss of the original image and the reconstructed image. The reconstruced image is from its latent vector after going through the pre-trained StyleGAN generator. This takes ~2 minutes running in GPU per image. Then a dataset containing the latent vector and 16 features (`Gender, Makeup, Glasses, Age, Smile, Anger, Contempt, Disgust, Fear, Neutral, Sadness, Surprise, Beard, Bald, BlondHair, BlackHair`) of images is used to train a generalized linear model (GLM) to identify all feature axes in the latent space. This takes ~1 minutes running in GPU. A method called Gram–Schmidt process is applied here to normalizing and orthonormalising all feature axes. Finally, features of a image can be tuned by moving the latent vector of the image along the corresponding feature axis. The image with custom features is obtained by inputting the tuned latent vector to the pre-trained StyleGAN generator.
+This repository is for my 4-week project at [Insight Data Science](https://www.insightdatascience.com): **Portrait-GANerator &mdash; Deep Learning for Portrait Editing**. 
+
+
+
+### Basic ideas
+Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN encoder ([@pbaylies](https://github.com/pbaylies/stylegan-encoder)) and latent space manipulation ([@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan)). 
+* The StyleGAN encoder can convert a image into a latent vector (18*512) in the latent space, by optimizing the perceptual loss of the original image and the reconstructed image. The reconstruced image is from its latent vector after going through the pre-trained StyleGAN generator. This takes ~2 minutes running in GPU per image. 
+
+* A dataset containing the latent vector and 16 features (`Gender, Makeup, Glasses, Age, Smile, Anger, Contempt, Disgust, Fear, Neutral, Sadness, Surprise, Beard, Bald, BlondHair, BlackHair`) of images is used to train a generalized linear model (GLM) to identify all feature axes in the latent space. This takes ~1 minutes running in GPU. A method called Gram–Schmidt process is applied here to normalizing and orthonormalising all feature axes. 
+
+* Features of a image can be tuned by moving the latent vector of the image along the corresponding feature axis. The image with custom features is obtained by inputting the tuned latent vector to the pre-trained StyleGAN generator.
 
 <!-- Introduction of PG-GAN (generate random photo-realistic images from random noise vectors in the latent space), TL-GAN ( control features of the generated images), StyleGAN (need to read the papaer carefully), StyleGAN encoder (how it works). -->
 
+
+
+### Resources
 * A Google Slides presenting the main ideas of this project is available [at this link](https://docs.google.com/presentation/d/1A2kYn3ROiRvGmY4l9Wl4ahF8fPFGcvkpsWgNYpymV4Y/edit#slide=id.g649c22c645_1_444).
+
 * A blog post expaining more details about the motivation, analysis, and results will be posted soon.
 
 <!-- An GUI demo will be demonstrated [at this link]() in Kaggle. -->  
