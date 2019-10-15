@@ -24,7 +24,10 @@ Portrait-GANerator is a portrait editing pipeline that built based on a StyleGAN
 
 * A blog post expaining more details about the motivation, analysis, and results will be posted soon.
 
-<!-- An GUI demo will be demonstrated [at this link]() in Kaggle. -->  
+* An GUI demo will be demonstrated in Kaggle soon.
+
+![Alt text](./static/video_GUI_fast.gif?raw=true "Title")
+
 
 <!-- All the following in root directory -->
 
@@ -103,4 +106,9 @@ Portrait-GANerator is a portrait editing pipeline that built based on a StyleGAN
 
 ### Results
 
+![Alt text](./static/video_p_loss_fast.gif?raw=true "Title")
+
 ![Alt text](./static/demo_obama_github.png)
+
+
+
