@@ -5,7 +5,7 @@ This repository is for my 4-week project at [Insight Data Science](https://www.i
 
 
 ### Basic ideas
-Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN encoder ([@pbaylies](https://github.com/pbaylies/stylegan-encoder)) and latent space manipulation ([@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan)).
+Portrait-GANerator is a portrait editing pipeline that built based on a StyleGAN encoder ([@pbaylies](https://github.com/pbaylies/stylegan-encoder)) and latent space manipulation ([@SummitKwan](https://github.com/SummitKwan/transparent_latent_gan)).
 
 * The StyleGAN encoder can convert a image into a latent vector (18*512) in the latent space, by optimizing latent vector using the perceptual loss of the original image and the reconstructed image. The reconstruced image is from its latent vector after going through the pre-trained StyleGAN generator. This takes ~2 minutes running in GPU per image. 
 
@@ -15,7 +15,7 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 <!-- Introduction of PG-GAN (generate random photo-realistic images from random noise vectors in the latent space), TL-GAN ( control features of the generated images), StyleGAN (need to read the papaer carefully), StyleGAN encoder (how it works). -->
 
-![Alt text](./static/ganerator_pipline.png)
+![Alt text](./static/pipeline_github.png)
 
 
 
@@ -103,4 +103,4 @@ Portrait-GANerator is a portrait editing pipline that built based on a StyleGAN 
 
 ### Results
 
-![Alt text](./static/demo_example1.png)
+![Alt text](./static/demo_obama_github.png)
