@@ -1,25 +1,52 @@
 import os
+import sys
+import bz2
 import argparse
 import pickle
 from tqdm import tqdm
 import PIL.Image
 import numpy as np
+import config
+import multiprocessing
+from keras.utils import get_file
+from keras.models import load_model
 import dnnlib
 import dnnlib.tflib as tflib
-import config
-from encoder.generator_model import Generator
-from encoder.perceptual_model import PerceptualModel, load_images
-from keras.models import load_model
+from encoder.ffhq_dataset.face_alignment import image_align
+from encoder.ffhq_dataset.landmarks_detector import LandmarksDetector
+from encoder.encoder.generator_model import Generator
+from encoder.encoder.perceptual_model import PerceptualModel, load_images
+
+
+def unpack_bz2(src_path):
+    data = bz2.BZ2File(src_path).read()
+    dst_path = src_path[:-4]
+    with open(dst_path, 'wb') as fp:
+        fp.write(data)
+    return dst_path
+
 
 def split_to_batches(l, n):
     for i in range(0, len(l), n):
         yield l[i:i + n]
+        
 
 def main():
-    parser = argparse.ArgumentParser(description='Find latent representation of reference images using perceptual losses', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
-    parser.add_argument('src_dir', help='Directory with images for encoding')
+    """
+    Extracts and aligns all faces from images using DLib and a function from original FFHQ dataset preparation step
+    python align_images.py /raw_images /aligned_images
+    """
+    parser = argparse.ArgumentParser(description='Align faces from input imagesm and find latent representation of aligned images using perceptual losses', formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('raw_dir', help='Directory with raw images for face alignment')
+    parser.add_argument('aligned_dir', help='Directory for storing aligned images')
     parser.add_argument('generated_images_dir', help='Directory for storing generated images')
     parser.add_argument('dlatent_dir', help='Directory for storing dlatent representations')
+
+    parser.add_argument('--output_size', default=1024, help='The dimension of images for input to the model', type=int)
+    parser.add_argument('--x_scale', default=1, help='Scaling factor for x dimension', type=float)
+    parser.add_argument('--y_scale', default=1, help='Scaling factor for y dimension', type=float)
+    parser.add_argument('--em_scale', default=0.1, help='Scaling factor for eye-mouth distance', type=float)
+    parser.add_argument('--use_alpha', default=False, help='Add an alpha channel for masking', type=bool)
     parser.add_argument('--data_dir', default='data', help='Directory for storing optional models')
     parser.add_argument('--mask_dir', default='masks', help='Directory for storing optional masks')
     parser.add_argument('--load_last', default='', help='Start with embeddings from directory')
@@ -64,26 +91,58 @@ def main():
     parser.add_argument('--video_frame_rate', default=24, help='Video frames per second', type=int)
     parser.add_argument('--video_size', default=512, help='Video size in pixels', type=int)
     parser.add_argument('--video_skip', default=1, help='Only write every n frames (1 = write every frame)', type=int)
-
+    
     args, other_args = parser.parse_known_args()
+    
+    LANDMARKS_MODEL_URL = 'http://dlib.net/files/shape_predictor_68_face_landmarks.dat.bz2'
+    landmarks_model_path = unpack_bz2(get_file('shape_predictor_68_face_landmarks.dat.bz2',
+                                               LANDMARKS_MODEL_URL, cache_subdir='temp'))
+    RAW_IMAGES_DIR = args.raw_dir
+    
+    os.makedirs(args.aligned_dir, exist_ok=True)
+    ALIGNED_IMAGES_DIR = args.aligned_dir
 
+    landmarks_detector = LandmarksDetector(landmarks_model_path)
+    for img_name in os.listdir(RAW_IMAGES_DIR):
+        print('Aligning %s ...' % img_name)
+        try:
+            raw_img_path = os.path.join(RAW_IMAGES_DIR, img_name)
+            fn = face_img_name = '%s_%02d.png' % (os.path.splitext(img_name)[0], 1)
+            if os.path.isfile(fn):
+                continue
+            print('Getting landmarks...')
+            for i, face_landmarks in enumerate(landmarks_detector.get_landmarks(raw_img_path), start=1):
+                try:
+                    print('Starting face alignment...')
+                    face_img_name = '%s_%02d.png' % (os.path.splitext(img_name)[0], i)
+                    aligned_face_path = os.path.join(ALIGNED_IMAGES_DIR, face_img_name)
+                    image_align(raw_img_path, aligned_face_path, face_landmarks, output_size=args.output_size, x_scale=args.x_scale, y_scale=args.y_scale, em_scale=args.em_scale, alpha=args.use_alpha)
+                    print('Wrote result %s' % aligned_face_path)
+                except:
+                    print('Exception in face alignment!')
+        except:
+            print('Exception in landmark detection!')   
+        
     args.decay_steps *= 0.01 * args.iterations # Calculate steps as a percent of total iterations
 
     if args.output_video:
         import cv2
         synthesis_kwargs = dict(output_transform=dict(func=tflib.convert_images_to_uint8, nchw_to_nhwc=False), minibatch_size=args.batch_size)
 
-    ref_images = [os.path.join(args.src_dir, x) for x in os.listdir(args.src_dir)]
+    ref_images = [os.path.join(args.aligned_dir, x) for x in os.listdir(args.aligned_dir)]
     ref_images = list(filter(os.path.isfile, ref_images))
 
     if len(ref_images) == 0:
-        raise Exception('%s is empty' % args.src_dir)
+        raise Exception('%s is empty' % args.aligned_dir)
 
     os.makedirs(args.data_dir, exist_ok=True)
-    os.makedirs(args.mask_dir, exist_ok=True)
     os.makedirs(args.generated_images_dir, exist_ok=True)
     os.makedirs(args.dlatent_dir, exist_ok=True)
-    os.makedirs(args.video_dir, exist_ok=True)
+    
+    if args.load_mask:
+        os.makedirs(args.mask_dir, exist_ok=True)
+    if args.output_video:
+        os.makedirs(args.video_dir, exist_ok=True)
 
     # Initialize generator and perceptual model
     tflib.init_tf()
@@ -176,3 +235,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+    
