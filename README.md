@@ -76,7 +76,7 @@ The output file `finetuned_resnet.h5` is saved in the folder `~/data/`. This tra
   ```
   python train_effnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
   ``` 
-The output file `finetuned_effnet.h5` is saved in the folder `~/data/`. This trained EfficientNet can convert a image to a latent vector (18*512), that is used as the initial value in encoding the image to a latent vector. You can also download a pre-trained EfficientNet [finetuned_effnet.h5](https://drive.google.com/open?id=12zWrGc3W0YuPANn3Rnl3OrNPskBO69fz), and put the downloaded file into the folder `~/data/`.
+The output file `finetuned_effnet.h5` is saved in the folder `~/data/`. This trained EfficientNet can convert a image to a latent vector (18*512), that is used as the initial value in encoding the image to a latent vector. You can also download a pre-trained EfficientNet [finetuned_effnet.h5](https://drive.google.com/open?id=1JmdUgizfCdTD7CT1SofgKEwUftSWPsMz), and put the downloaded file into the folder `~/data/`.
 
 
 
