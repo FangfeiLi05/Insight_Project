@@ -67,54 +67,48 @@ The output file `feature_axis.h5` is saved in the folder `~/data/`. To skip this
 #### 3. Train a ResNet or a EfficientNet
 * Train a ResNet with `train_resnet.py`. 
   ```
-  python train_resnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
+  python train_resnet.py --test_size 256 --batch_size 1024 --max_patience 1
   ``` 
 The output file `finetuned_resnet.h5` is saved in the folder `~/data/`. This trained ResNet can convert a image to a latent vector (18*512), that is used as the initial value in encoding the image to a latent vector. You can also download a pre-trained ResNet [finetuned_resnet.h5](https://drive.google.com/open?id=12nM4KU7IBXGV5b5j1QV9f_3XQ2WmI8El), and put the downloaded file into the folder `~/data/`.
 
 
-* Train a EfficientNet with `train_effnet.py`. 
+<!-- * Train a EfficientNet with `train_effnet.py`. 
   ```
   python train_effnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
   ``` 
-The output file `finetuned_effnet.h5` is saved in the folder `~/data/`. This trained EfficientNet can convert a image to a latent vector (18*512), that is used as the initial value in encoding the image to a latent vector. You can also download a pre-trained EfficientNet [finetuned_effnet.h5](https://drive.google.com/open?id=12zWrGc3W0YuPANn3Rnl3OrNPskBO69fz), and put the downloaded file into the folder `~/data/`.
+The output file `finetuned_effnet.h5` is saved in the folder `~/data/`. This trained EfficientNet can convert a image to a latent vector (18*512), that is used as the initial value in encoding the image to a latent vector. You can also download a pre-trained EfficientNet [finetuned_effnet.h5](https://drive.google.com/open?id=12zWrGc3W0YuPANn3Rnl3OrNPskBO69fz), and put the downloaded file into the folder `~/data/`.-->
 
 
 
 #### 4. Encode image into latent vector
+* Encode the image into the latent vector with `image_encoder.py`. 
   ```
   python image_encoder.py --load_resnet=data/finetuned_resnet --use_vgg_loss=1 images_raw/ images_aligned/ images_generate/ images_latent/
-  python image_encoder.py --load_effnet=data/finetuned_effnet --use_vgg_loss=1 images_raw/ images_aligned/ images_generate/ images_latent/
-  
   ```
-The input original images are stored in the folder `~/images_raw/`. 
-The output aligned images are stored in the folder `~/images_aligned/`.
-The output reconstructed images are stored in the folder `~/images_generate/`.
-The output latent vectors of images are stored in the folder `~/images_latent/`.
+The input original images are stored in the folder `~/images_raw/`. The output aligned images are stored in the folder `~/images_aligned/`. The output reconstructed images are stored in the folder `~/images_generate/`. The output latent vectors of images are stored in the folder `~/images_latent/`.
 
 
- 
-#### 5. Tune facial feature
-* Tune facial features in the latent space and reconstruct the image using the pretrained StyleGAN generator. (modify later)
+
+#### 5. Tune facial features
+* Tune facial features by moving the latent vector in the latent space, then reconstruct the image using the pretrained StyleGAN generator.
   ```
   import pandas as pd
   import numpy as np
+  import PIL
   from PIL import Image
   from manipulate_latent import latent_to_imageRGB, latent_to_image, tune_latent
   
   display(Image.open('./images_raw/000001.jpg'))   # Original image
-  
   display(Image.open('./images_aligned/000001_01.png').resize((256,256)))   # Aligned image
-  
-  image_array = latent_to_imageRGB(image_latent)
-  Image.fromarray(image_array, 'RGB').resize((256,256), PIL.Image.LANCZOS)
+
   image_latent = np.load('./images_latent/000001_01.npy')
   latent_to_image(image_latent)   # Reconstructed image
 
   feature_axis_DataFrame = pd.read_hdf('./data/feature_axis.h5', 'df')
   feature_axis_array = np.array(feature_axis_DataFrame)
-  i = 15
+  i = 0
   direction = feature_axis_array[:,i].reshape((18, 512))
-  coeff = 10
+  coeff = -8
   image_latent_tuned = tune_latent(image_latent, direction, coeff, list(range(8)))
   latent_to_image(image_latent_tuned)   # Feature-tuned image
   ```
