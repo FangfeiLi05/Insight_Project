@@ -131,7 +131,7 @@ The input original images are stored in the folder `~/images_raw/`. The output a
 
 The figure shows the performance of Portrait-GANerator. The row corresponds to facial feature, and the column show the degree of the tuning.
 
-![Alt text](./static/video_p_loss_fast.gif?raw=true "Title")
+![Alt text](./static/video_p_loss.gif?raw=true "Title")
 
 
 The figure shows the process of optimizing perceptual loss. 
