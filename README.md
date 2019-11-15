@@ -45,7 +45,7 @@ Potential future direction: try different loss function, try on animals, animati
 ### Pipeline Tutorial
 
 #### 1. Set up coding environment
-* GPU is required, with Anaconda Python 3.6. This pipeline has been tested on AWS (Amazon Web Services) with a Amazon EC2 P2 instance *p2.xlarge* (single NVIDIA K80 GPU) in AMI (Amazon Machine Images) *Deep Learning AMI (Ubuntu 16.04) Version 25.3*. In addition, this pipeline has also been tested on Google Colab with free GPU. A walk-through Colaboratory is available [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](*** add later).
+* GPU is required, with Anaconda Python 3.6. This pipeline has been tested on AWS (Amazon Web Services) with a Amazon EC2 P2 instance *p2.xlarge* (single NVIDIA K80 GPU) in AMI (Amazon Machine Images) *Deep Learning AMI (Ubuntu 16.04) Version 25.3*. In addition, this pipeline has also been tested on Google Colab with free GPU. A walk-through Colaboratory is available [![Open In Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://drive.google.com/file/d/1M9uELf-TEY2nflf8GXVhUsM5q-pUZZiB/view?usp=sharing)].
 
 * Clone this repository by running `git clone https://github.com/FangfeiLi05/Insight_Project.git` in terminal.
 
