@@ -60,7 +60,7 @@ Potential future direction: try different loss function, try on animals, animati
   ```  
   python feature_axis.py
   ```
-The output file `feature_axis.h5` is saved in the folder `~/data/`. To skip this training, you can also download a pre-trained feature axes file [feature_axis.h5](https://drive.google.com/open?id=1TFHtjZTpZqcZLt8Ovx54XeoT-wHZXkgc), make a folder by `mkdir data` and put the downloaded file into the folder `~/data/`.
+The output file `feature_axis.h5` is saved in the folder `~/data/`. To skip this training, you can also download a pre-trained feature axes file [feature_axis.h5](https://drive.google.com/open?id=1yRpdWXKnUYSjtye4QXzJ3FxMx3QxuOq2), make a folder by `mkdir data` and put the downloaded file into the folder `~/data/`.
   
 
 
