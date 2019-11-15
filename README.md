@@ -31,7 +31,7 @@ Potential future direction: try different loss function, try on animals, animati
 
 
 ### Resources
-* A Google Slides presenting the main ideas of this project is available [at this link](https://docs.google.com/presentation/d/1A2kYn3ROiRvGmY4l9Wl4ahF8fPFGcvkpsWgNYpymV4Y/edit#slide=id.g649c22c645_1_444).
+* A Google Slides presenting the main ideas of this project is available [here](https://docs.google.com/presentation/d/1A2kYn3ROiRvGmY4l9Wl4ahF8fPFGcvkpsWgNYpymV4Y/edit#slide=id.g649c22c645_1_444).
 * A blog post expaining more details about the motivation, analysis, and results will be posted soon.
 * An GUI demo will be demonstrated in Kaggle soon.
 
