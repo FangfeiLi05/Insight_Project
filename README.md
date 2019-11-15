@@ -64,7 +64,7 @@ The output file `feature_axis.h5` is saved in the folder `~/data/`. To skip this
   
 
 
-#### 3. Train a EfficientNet
+#### 3. Train a EfficientNet or a ResNet
 * Train a EfficientNet with `train_effnet.py`. 
   ```
   python train_effnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
