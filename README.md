@@ -103,10 +103,6 @@ The input original images are stored in the folder `~/images_raw/`. The output a
   print('Aligned photo...')
   display(Image.open('./images_aligned/000001_01.png').resize((256,256)))
 
-  #from manipulate_latent import latent_to_imageRGB
-  #image_array = latent_to_imageRGB(image_latent)
-  #Image.fromarray(image_array, 'RGB').resize((256,256), Image.LANCZOS)
-
   print('Reconstructed photo...')
   image_latent = np.load('./images_latent/000001_01.npy')
   latent_to_image(image_latent)
@@ -117,7 +113,6 @@ The input original images are stored in the folder `~/images_raw/`. The output a
 
   feature_axis_DataFrame = pd.read_hdf('./data/feature_axis.h5', 'df')
   feature_axis_array = np.array(feature_axis_DataFrame)
-
   i = 3
   direction = feature_axis_array[:,i].reshape((18, 512))
   coeff = 10
