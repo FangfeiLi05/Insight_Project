@@ -93,25 +93,38 @@ The input original images are stored in the folder `~/images_raw/`. The output a
 #### 5. Tune facial features
 * Tune facial features by moving the latent vector in the latent space, then reconstruct the image using the pretrained StyleGAN generator.
   ```
-  import pandas as pd
-  import numpy as np
-  import PIL
   from PIL import Image
-  from manipulate_latent import latent_to_imageRGB, latent_to_image, tune_latent
+  import numpy as np
+  from manipulate_latent import latent_to_image
   
-  display(Image.open('./images_raw/000001.jpg'))   # Original image
-  display(Image.open('./images_aligned/000001_01.png').resize((256,256)))   # Aligned image
+  print('Original photo...')
+  display(Image.open('./images_raw/000001.jpg'))
+  
+  print('Aligned photo...')
+  display(Image.open('./images_aligned/000001_01.png').resize((256,256)))
 
+  #from manipulate_latent import latent_to_imageRGB
+  #image_array = latent_to_imageRGB(image_latent)
+  #Image.fromarray(image_array, 'RGB').resize((256,256), Image.LANCZOS)
+
+  print('Reconstructed photo...')
   image_latent = np.load('./images_latent/000001_01.npy')
-  latent_to_image(image_latent)   # Reconstructed image
+  latent_to_image(image_latent)
+
+
+  import pandas as pd
+  from manipulate_latent import tune_latent
 
   feature_axis_DataFrame = pd.read_hdf('./data/feature_axis.h5', 'df')
   feature_axis_array = np.array(feature_axis_DataFrame)
-  i = 0
+
+  i = 3
   direction = feature_axis_array[:,i].reshape((18, 512))
-  coeff = -8
+  coeff = 10
+
+  print('Feature-tuned photo...')
   image_latent_tuned = tune_latent(image_latent, direction, coeff, list(range(8)))
-  latent_to_image(image_latent_tuned)   # Feature-tuned image
+  latent_to_image(image_latent_tuned)
   ```
 
 
