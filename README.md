@@ -64,21 +64,12 @@ The output file `feature_axis.h5` is saved in the folder `~/data/`. To skip this
   
 
 
-#### 3. Train a EfficientNet or a ResNet
+#### 3. Train a EfficientNet
 * Train a EfficientNet with `train_effnet.py`. 
   ```
   python train_effnet.py --test_size 256 --batch_size 1024 --loop 1 --max_patience 1
   ``` 
 The output file `finetuned_effnet.h5` is saved in the folder `~/data/`. This trained EfficientNet can convert a image to a latent vector (18*512), that is used as the initial value in encoding the image to a latent vector. You can also download a pre-trained EfficientNet [finetuned_effnet.h5](https://drive.google.com/open?id=1Vu8W5_Rs9-RPqAR1xci6uR26FgfTR-2l), and put the downloaded file into the folder `~/data/`.
-
-
-* Train a ResNet with `train_resnet.py`. 
-  ```
-  python train_resnet.py --test_size 256 --batch_size 1024 --max_patience 1
-  ``` 
-The output file `finetuned_resnet.h5` is saved in the folder `~/data/`. This trained ResNet can convert a image to a latent vector (18*512), that is used as the initial value in encoding the image to a latent vector. You can also download a pre-trained ResNet [finetuned_resnet.h5](https://drive.google.com/open?id=12nM4KU7IBXGV5b5j1QV9f_3XQ2WmI8El), and put the downloaded file into the folder `~/data/`.
-
-
 
 
 
@@ -87,7 +78,6 @@ The output file `finetuned_resnet.h5` is saved in the folder `~/data/`. This tra
 * Encode the image into the latent vector with `image_encoder.py`. 
   ```
   python image_encoder.py --load_effnet=data/finetuned_effnet --use_vgg_loss=1 images_raw/ images_aligned/ images_generate/ images_latent/
-  python image_encoder.py --load_resnet=data/finetuned_resnet --use_vgg_loss=1 images_raw/ images_aligned/ images_generate/ images_latent/
   ```
 The input original images are stored in the folder `~/images_raw/`. The output aligned images are stored in the folder `~/images_aligned/`. The output reconstructed images are stored in the folder `~/images_generate/`. The output latent vectors of images are stored in the folder `~/images_latent/`.
 
