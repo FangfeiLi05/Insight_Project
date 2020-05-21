@@ -138,7 +138,7 @@ The figure below shows the process of optimizing perceptual loss.
 
 
 
-Code for n GUI demo is also attached.
+Code for GUI demo is also attached.
 
 Potential future direction: try different loss function, try on animals, animations, art pictures...
 
