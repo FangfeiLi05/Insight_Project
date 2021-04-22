@@ -2,7 +2,7 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://lbesson.mit-license.org)
 [![AWS](https://img.shields.io/badge/AWS-EC2-green.svg)](https://aws.amazon.com/)
 [![Google](https://img.shields.io/badge/Google-Colab-green.svg)](https://colab.research.google.com/notebooks/welcome.ipynb)
-[![Contact Info](https://img.shields.io/badge/Contact%20Info-fangfeili.fanny@gmail.com-orange.svg)]()
+[![Contact Info](https://img.shields.io/badge/Contact%20Info-fangfeili0525@gmail.com-orange.svg)]()
 
 
 
