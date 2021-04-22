@@ -1,3 +1,5 @@
+# This code are mainly based on the original code encode_images.py (from https://github.com/pbaylies/stylegan-encoder/blob/master/encode_images.py)
+# I try to use this encoder to convert a image into a vector (or matrix) in latent space. I make some modifications based my own uses. 
 import os
 import sys
 import bz2
