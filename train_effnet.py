@@ -1,3 +1,7 @@
+""" 
+This code is directed from stylegan-encoder (https://github.com/pbaylies/stylegan-encoder/blob/master/train_effnet.py), without any change.
+""" 
+
 """
 Trains a modified EfficientNet to generate approximate dlatents using examples from a trained StyleGAN.
 Props to @SimJeg on GitHub for the original code this is based on, from this thread: https://github.com/Puzer/stylegan-encoder/issues/1#issuecomment-490469454
