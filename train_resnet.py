@@ -1,3 +1,7 @@
+""" 
+This code is directed from stylegan-encoder (https://github.com/pbaylies/stylegan-encoder/blob/master/train_resnet.py), without any change.
+""" 
+
 """
 Trains a modified ResNet to generate approximate dlatents using examples from a trained StyleGAN.
 Props to @SimJeg on GitHub for the original code this is based on,
